@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: action-yarn
-      uses: comchangs/action-yarn@v0.1-beta
+      uses: comchangs/action-yarn@master
 
     # Runs a single command using the runners shell
     - name: Install dependencies
