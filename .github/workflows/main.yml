@@ -35,7 +35,7 @@ jobs:
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@3.0.0
       with:
-        ftp-server: ftp://soydac.com
+        ftp-server: ftp://soydac.com/httpdocs/
         ftp-username: soydac
         ftp-password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: /httpdocs
+        local-dir: dist/
