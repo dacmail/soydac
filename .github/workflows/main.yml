@@ -13,30 +13,28 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  build-and-deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: Install dependencies
-      uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: install
-      
-    - name: Build
-      uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: build
+      # Runs a single command using the runners shell
+      - uses: bahmutov/npm-install@v1
+
+      - name: Install dependencies
+        run: npm run install
     
-    - name: FTP Deploy
-      uses: SamKirkland/FTP-Deploy-Action@3.0.0
-      with:
-        ftp-server: ftp://soydac.com/httpdocs/
-        ftp-username: soydac
-        ftp-password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: dist/
+      - name: build
+        run: npm run build
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@3.0.0
+        with:
+          ftp-server: ftp://soydac.com/httpdocs/
+          ftp-username: soydac
+          ftp-password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
