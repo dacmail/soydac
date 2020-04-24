@@ -71,10 +71,26 @@ table {
 }
 
 //BASE
+html {
+  height: 100%;
+}
+
 body {
   font-size: 16px;
   line-height: 1.3;
   font-family: 'Open Sans', sans-serif;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: rgb(42,45,46);
+    color: #f0f2f3;
+  }
+
+  @media (min-width: 1024px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 }
 
 a {
@@ -83,6 +99,10 @@ a {
   display: inline-block;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   text-decoration: none;
+
+  @media (prefers-color-scheme: dark) {
+    color: #fff;
+  }
 
   &:hover {
     opacity: 1;
